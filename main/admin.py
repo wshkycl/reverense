@@ -1,15 +1,18 @@
 from django.contrib import admin
 from .models import Category, Size, Product, \
-    ProductSize, ProductImage
+    ProductImage, ProductSize
 
+# Register your models here.
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
 
+
 class ProductSizeInline(admin.TabularInline):
     model = ProductSize
     extra = 1
+
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'color', 'price']
@@ -18,13 +21,14 @@ class ProductAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     inlines = [ProductImageInline, ProductSizeInline]
 
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name',)}
 
+
 class SizeAdmin(admin.ModelAdmin):
     list_display = ['name']
-
 
 
 admin.site.register(Category, CategoryAdmin)
